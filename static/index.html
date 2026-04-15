@@ -836,6 +836,7 @@
     .coa-auto-row:hover { border-color: #3a3a3a; }
     .coa-auto-row.open { border-color: var(--accent); background: rgba(79,142,247,0.04); }
     .coa-auto-head { display: grid; grid-template-columns: auto auto 1fr auto auto; gap: 0.4rem; align-items: center; padding: 0.35rem 0.5rem; cursor: pointer; font-size: 0.72rem; }
+    .coa-auto-head .dr-src-group { display: inline-flex; gap: 0.25rem; align-items: center; }
     .coa-auto-head:hover { background: rgba(255,255,255,0.02); }
     .coa-auto-head .dr-chev { color: var(--muted); font-size: 0.6rem; transition: transform 0.15s; }
     .coa-auto-row.open .coa-auto-head .dr-chev { transform: rotate(90deg); color: var(--accent); }
@@ -2032,10 +2033,10 @@
       const cveLabel = n > 1 ? `${item.app} · ${n} CVEs` : item.cve.id;
       const meta = [n > 1 ? `${n} CVEs` : null, hc ? `${hc} host${hc === 1 ? '' : 's'}` : null]
         .filter(Boolean).join(' · ') || item.cve.severity;
-      const srcBadges = item.actions.map(a => {
+      const srcBadges = `<span class="dr-src-group">${item.actions.map(a => {
         const srcName = a.src === 'aws' ? 'AWS' : a.src === 'azure' ? 'Azure' : 'Cisco';
         return `<span class="dr-src ${a.src}">${srcName}</span>`;
-      }).join(' ');
+      }).join('')}</span>`;
       const primaryLabel = item.actions[0] ? item.actions[0].label : item.cve._groupLabel || 'Remediate';
 
       const category = item.category;
